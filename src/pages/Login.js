@@ -31,6 +31,7 @@ function Auth() {
 
       window.location.hash = "";
       window.localStorage.setItem("token", token);
+      postToken(token);
     }
 
     setToken(token);
@@ -54,6 +55,13 @@ function Auth() {
     });
 
     setArtists(data.artists.items);
+  };
+
+  const postToken = (token) => {
+    axios.post("http://127.0.0.1:8000/items/", {
+      token: token,
+      name: "Tom Gaydy",
+    });
   };
 
   const renderArtists = () => {
