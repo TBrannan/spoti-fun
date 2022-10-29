@@ -27,21 +27,33 @@ const Client = () => {
     setToken(data.token);
   };
 
-  const Clicker = async () => {
-    console.log("Click");
+  const Clicker = async (e, song_id) => {
+    console.log(song_id);
+    e.preventDefault();
+    await axios.post(
+      `https://api.spotify.com/v1/playlists/${process.env.REACT_APP_PLAYLIST_ID}/tracks?uris=spotify:track:${song_id}`,
+      {
+        Authorization: `Bearer ${token}`,
+        accept: "application/json",
+      }
+    );
   };
 
   const renderArtists = () => {
-    console.log(tracks);
     return tracks.map((tracks) => (
-      <div className="grid-container" key={tracks.id} onClick={Clicker}>
-        <div className="grid-item">
+      <div
+        className="grid-container"
+        key={tracks.id}
+        value={tracks.id}
+        onClick={(e) => Clicker(e, tracks.id)}
+      >
+        <div className="limit">
           {tracks.name}
           <br></br>
           {tracks.artists[0].name}
         </div>
         {tracks.album.images.length ? (
-          <img width={"50%"} src={tracks.album.images[0].url} alt="" />
+          <img width={"100%"} src={tracks.album.images[0].url} alt="" />
         ) : (
           <div>No Image</div>
         )}

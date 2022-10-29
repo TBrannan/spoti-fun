@@ -17,10 +17,16 @@
   align-items: center;
   justify-content: center;
 }
+
+.limit {
+  word-wrap: break-word;
+}
+
 .grid-container {
   background-color: rgb(0, 0, 0);
   border: 1px solid rgb(255, 255, 255);
   padding: 20px;
+  width: fit-content;
 }
 .grid-item {
   background-color: #000000;
