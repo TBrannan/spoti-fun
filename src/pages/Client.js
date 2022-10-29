@@ -4,39 +4,47 @@ import axios from "axios";
 const Client = () => {
   const [token, setToken] = useState("");
   const [searchKey, setSearchKey] = useState("");
-  const [artists, setArtists] = useState([]);
+  const [tracks, setTracks] = useState([]);
 
-  const searchArtists = async (e) => {
+  const mobilesearchArtists = async (e) => {
     e.preventDefault();
+    await get_token();
     const { data } = await axios.get("https://api.spotify.com/v1/search", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
       params: {
         q: searchKey,
-        type: "artist",
+        type: "track",
       },
     });
 
-    setArtists(data.artists.items);
+    setTracks(data.tracks.items);
   };
 
-  const get_token = async (e) => {
-    e.preventDefault();
-    const { data } = await axios.get("http://127.0.0.1:8000/items/token", {});
+  const get_token = async () => {
+    const { data } = await axios.get(process.env.REACT_APP_GET_ADDRESS, {});
     setToken(data.token);
-    setSearchKey();
+  };
+
+  const Clicker = async () => {
+    console.log("Click");
   };
 
   const renderArtists = () => {
-    return artists.map((artist) => (
-      <div key={artist.id}>
-        {artist.images.length ? (
-          <img width={"100%"} src={artist.images[0].url} alt="" />
+    console.log(tracks);
+    return tracks.map((tracks) => (
+      <div className="grid-container" key={tracks.id} onClick={Clicker}>
+        <div className="grid-item">
+          {tracks.name}
+          <br></br>
+          {tracks.artists[0].name}
+        </div>
+        {tracks.album.images.length ? (
+          <img width={"50%"} src={tracks.album.images[0].url} alt="" />
         ) : (
           <div>No Image</div>
         )}
-        {artist.name}
       </div>
     ));
   };
@@ -45,15 +53,14 @@ const Client = () => {
     <div className="App">
       <header className="App-header">
         <h1>Song Fucker Upper</h1>
+        <form onSubmit={mobilesearchArtists}>
+          <input type="text" onChange={(e) => setSearchKey(e.target.value)} />
+          <button type={"submit"} onClick={mobilesearchArtists}>
+            Search
+          </button>
+        </form>
 
-        {token ? (
-          <form onSubmit={searchArtists}>
-            <input type="text" onChange={(e) => setSearchKey(e.target.value)} />
-            <button type={"submit"}>Search</button>
-          </form>
-        ) : (
-          <h2>Please login</h2>
-        )}
+        {/* {clicked ? rendershit() : <div>NO</div>} */}
 
         {renderArtists()}
       </header>

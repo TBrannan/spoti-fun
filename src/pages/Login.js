@@ -58,7 +58,7 @@ function Auth() {
   };
 
   const postToken = (token) => {
-    axios.post("http://127.0.0.1:8000/items/", {
+    axios.post(process.env.REACT_APP_POST_ADDRESS, {
       token: token,
       name: "Tom Gaydy",
     });
