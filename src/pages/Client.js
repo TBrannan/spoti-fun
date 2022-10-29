@@ -2,8 +2,9 @@ import { useState } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import get_playlist from "./Host";
 
-const Client = () => {
+const Client = (props) => {
   const [token, setToken] = useState("");
   const [searchKey, setSearchKey] = useState("");
   const [tracks, setTracks] = useState([]);
@@ -30,7 +31,6 @@ const Client = () => {
   };
 
   const Clicker = async (e, song_id, name) => {
-    console.log(song_id);
     e.preventDefault();
     axios({
       method: "post",
@@ -44,6 +44,26 @@ const Client = () => {
       },
     });
     toast(name + " Added");
+    update_playlist();
+  };
+
+  const update_playlist = async () => {
+    const { data } = await axios.get(
+      `https://api.spotify.com/v1/playlists/${process.env.REACT_APP_PLAYLIST_ID}/tracks?`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    postPlaylist(data);
+  };
+
+  const postPlaylist = (playlist) => {
+    axios.post(process.env.REACT_APP_POST_PLAYLIST, {
+      playlist: JSON.stringify(playlist),
+    });
   };
 
   const renderArtists = () => {
@@ -71,7 +91,7 @@ const Client = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Song Fucker Upper</h1>
+        <h1>Add Song to Spooky Playlist</h1>
         <form onSubmit={mobilesearchArtists}>
           <input type="text" onChange={(e) => setSearchKey(e.target.value)} />
           <button type={"submit"} onClick={mobilesearchArtists}>

@@ -1,5 +1,4 @@
 # main.py
-#uvicorn --host 192.168.254.19 main:app
 
 from typing import Optional
 from fastapi.middleware.cors import CORSMiddleware
@@ -7,10 +6,15 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 
 item_dict = {}
+playlist_dict = {}
 
 class Item(BaseModel):
     token: str
     name: Optional[str] = None
+
+
+class Player(BaseModel):
+    playlist:str
 
 app = FastAPI()
 
@@ -31,7 +35,22 @@ async def create_item(item:Item):
     print(item_dict)
     return item_dict
 
+
 @app.get("/items/token/")
 async def get_item():
-    print("test")
     return item_dict
+
+
+class Player(BaseModel):
+    playlist:str
+
+
+@app.get("/items/playlist/")
+async def get_item():
+    return playlist_dict["playlist"]
+
+@app.post("/playlist/")
+async def create_item(item:Player):
+    print("Posting playlist")
+    playlist_dict.update({"playlist": item.playlist})
+    return playlist_dict["playlist"]
