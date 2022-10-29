@@ -1,5 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Client = () => {
   const [token, setToken] = useState("");
@@ -27,16 +29,21 @@ const Client = () => {
     setToken(data.token);
   };
 
-  const Clicker = async (e, song_id) => {
+  const Clicker = async (e, song_id, name) => {
     console.log(song_id);
     e.preventDefault();
-    await axios.post(
-      `https://api.spotify.com/v1/playlists/${process.env.REACT_APP_PLAYLIST_ID}/tracks?uris=spotify:track:${song_id}`,
-      {
+    axios({
+      method: "post",
+      url: `https://api.spotify.com/v1/playlists/${process.env.REACT_APP_PLAYLIST_ID}/tracks?uris=spotify:track:${song_id}`,
+      data: {
+        grant_type: "client_credentials",
+      },
+      headers: {
         Authorization: `Bearer ${token}`,
-        accept: "application/json",
-      }
-    );
+        "Content-Type": "application/json",
+      },
+    });
+    toast(name + " Added");
   };
 
   const renderArtists = () => {
@@ -45,7 +52,7 @@ const Client = () => {
         className="grid-container"
         key={tracks.id}
         value={tracks.id}
-        onClick={(e) => Clicker(e, tracks.id)}
+        onClick={(e) => Clicker(e, tracks.id, tracks.name)}
       >
         <div className="limit">
           {tracks.name}
@@ -72,9 +79,8 @@ const Client = () => {
           </button>
         </form>
 
-        {/* {clicked ? rendershit() : <div>NO</div>} */}
-
         {renderArtists()}
+        <ToastContainer />
       </header>
     </div>
   );
