@@ -11,16 +11,20 @@ const Client = (props) => {
 
   const mobilesearchArtists = async (e) => {
     e.preventDefault();
-    await get_token();
-    const { data } = await axios.get("https://api.spotify.com/v1/search", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      params: {
-        q: searchKey,
-        type: "track",
-      },
-    });
+    const local_token = await get_token();
+    const data = await axios
+      .get("https://api.spotify.com/v1/search", {
+        headers: {
+          Authorization: `Bearer ${local_token}`,
+        },
+        params: {
+          q: searchKey,
+          type: "track",
+        },
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
     setTracks(data.tracks.items);
   };
@@ -28,6 +32,7 @@ const Client = (props) => {
   const get_token = async () => {
     const { data } = await axios.get(process.env.REACT_APP_GET_ADDRESS, {});
     setToken(data.token);
+    return data.token;
   };
 
   const Clicker = async (e, song_id, name) => {
@@ -48,14 +53,18 @@ const Client = (props) => {
   };
 
   const update_playlist = async () => {
-    const { data } = await axios.get(
-      `https://api.spotify.com/v1/playlists/${process.env.REACT_APP_PLAYLIST_ID}/tracks?`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    const { data } = await axios
+      .get(
+        `https://api.spotify.com/v1/playlists/${process.env.REACT_APP_PLAYLIST_ID}/tracks?`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .catch((err) => {
+        console.log(err);
+      });
 
     postPlaylist(data);
   };

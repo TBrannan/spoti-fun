@@ -44,15 +44,19 @@ function Auth() {
 
   const searchArtists = async (e) => {
     e.preventDefault();
-    const { data } = await axios.get("https://api.spotify.com/v1/search", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      params: {
-        q: searchKey,
-        type: "artist",
-      },
-    });
+    const { data } = await axios
+      .get("https://api.spotify.com/v1/search", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        params: {
+          q: searchKey,
+          type: "artist",
+        },
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
     setArtists(data.artists.items);
   };

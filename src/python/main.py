@@ -51,6 +51,9 @@ async def get_item():
 
 @app.post("/playlist/")
 async def create_item(item:Player):
-    print("Posting playlist")
-    playlist_dict.update({"playlist": item.playlist})
-    return playlist_dict["playlist"]
+    try:
+        print("Posting playlist")
+        playlist_dict.update({"playlist": item.playlist})
+        return playlist_dict["playlist"]
+    except Exception as e:
+        print(e)
