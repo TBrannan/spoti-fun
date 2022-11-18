@@ -12,19 +12,15 @@ const Client = (props) => {
   const mobilesearchArtists = async (e) => {
     e.preventDefault();
     const local_token = await get_token();
-    const data = await axios
-      .get("https://api.spotify.com/v1/search", {
-        headers: {
-          Authorization: `Bearer ${local_token}`,
-        },
-        params: {
-          q: searchKey,
-          type: "track",
-        },
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    const { data } = await axios.get("https://api.spotify.com/v1/search", {
+      headers: {
+        Authorization: `Bearer ${local_token}`,
+      },
+      params: {
+        q: searchKey,
+        type: "track",
+      },
+    });
 
     setTracks(data.tracks.items);
   };
