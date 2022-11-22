@@ -1,6 +1,6 @@
 import Login from "./pages/Login";
-import Host from "./pages/Host";
 import Client from "./pages/Client";
+import Host from "./pages/Host";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import "./App.css";
 
@@ -16,13 +16,6 @@ function App() {
         </Routes>
       </BrowserRouter>
     </div>
-
-    // <Route path="/host">
-    //   <Host />
-    // <Route/>
-    // <Route path="/client">
-    //   <Client />
-    // <Route/>
   );
 }
 

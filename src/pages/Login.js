@@ -31,6 +31,7 @@ function Auth() {
 
       window.location.hash = "";
       window.localStorage.setItem("token", token);
+      localStorage.setItem("token", token);
       postToken(token);
     }
 
@@ -40,25 +41,6 @@ function Auth() {
   const logout = () => {
     setToken("");
     window.localStorage.removeItem("token");
-  };
-
-  const searchArtists = async (e) => {
-    e.preventDefault();
-    const { data } = await axios
-      .get("https://api.spotify.com/v1/search", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        params: {
-          q: searchKey,
-          type: "artist",
-        },
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    setArtists(data.artists.items);
   };
 
   const postToken = (token) => {
@@ -95,16 +77,7 @@ function Auth() {
           <button onClick={logout}>Logout</button>
         )}
 
-        {token ? (
-          <form onSubmit={searchArtists}>
-            <input type="text" onChange={(e) => setSearchKey(e.target.value)} />
-            <button type={"submit"}>Search</button>
-          </form>
-        ) : (
-          <h2>Please login</h2>
-        )}
-
-        {renderArtists()}
+        {token ? "You are now loggged in" : <h2>Please login</h2>}
       </header>
     </div>
   );

@@ -2,7 +2,6 @@ import { useState } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import get_playlist from "./Host";
 
 const Client = (props) => {
   const [token, setToken] = useState("");
@@ -69,6 +68,7 @@ const Client = (props) => {
       });
 
     postPlaylist(data);
+    localStorage.setItem("data", JSON.stringify(data));
   };
 
   const postPlaylist = (playlist) => {
