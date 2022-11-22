@@ -67,14 +67,9 @@ const Client = (props) => {
         console.log(err);
       });
 
-    postPlaylist(data);
-    localStorage.setItem("data", JSON.stringify(data));
-  };
+    const host_data = data.items;
 
-  const postPlaylist = (playlist) => {
-    axios.post(process.env.REACT_APP_POST_PLAYLIST, {
-      playlist: JSON.stringify(playlist),
-    });
+    localStorage.setItem("data", JSON.stringify(host_data.reverse()));
   };
 
   const renderArtists = () => {

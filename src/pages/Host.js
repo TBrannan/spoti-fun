@@ -3,32 +3,29 @@ import "../App.css";
 
 const Host = () => {
   const data_str = localStorage.getItem("data");
-  const raw_data = JSON.parse(data_str);
-  const reversed = raw_data.items.reverse();
+  const final_data = JSON.parse(data_str);
 
-  const [list, setList] = useState(reversed);
+  const [list, setList] = useState(final_data);
 
   useEffect(() => {
     function checkUserData() {
       const item = localStorage.getItem("data");
-      const data_str = localStorage.getItem("data");
-      const raw_data = JSON.parse(data_str);
-      const reversed = raw_data.items.reverse();
+      const parsed_data = JSON.parse(item);
+      console.log(parsed_data);
 
       if (item) {
-        setList(reversed);
+        setList(parsed_data);
       }
     }
 
     window.addEventListener("storage", checkUserData);
 
     return () => {
-      window.removeEventListener("storage", checkUserData);
+      localStorage.removeItem("storage", checkUserData);
     };
   }, []);
 
   const renderArtists = () => {
-    console.log(list);
     return list.map((tracks) => (
       <div
         className="grid-container"
