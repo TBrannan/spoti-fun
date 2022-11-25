@@ -21,7 +21,7 @@ function App() {
   // );
 
   return (
-    <div>
+    <div className="background-boi">
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/menu" element={<Menu />} />

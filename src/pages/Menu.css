@@ -8,10 +8,11 @@
   color: #fff;
   font-size: 15px;
   font-family: inherit;
-  padding: 40px 200px;
+  padding: 20px 50px;
   border-width: 0.2em;
   border-radius: 0.5em;
   border-color: rgb(255, 119, 0);
+  flex: 1;
 }
 
 .btn:focus {
@@ -27,18 +28,6 @@
   width: 100%;
 }
 
-.column {
-  float: left;
-  width: 25%;
-}
-
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
 @media screen and (max-width: 600px) {
   .column {
     width: 100%;
@@ -49,12 +38,6 @@
   display: grid;
 }
 
-.grid-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-auto-rows: 60px;
-  grid-gap: 20px;
-}
 .grid-item {
   display: flex;
   align-items: center;
@@ -63,4 +46,9 @@
 
 .limit {
   word-wrap: break-word;
+}
+
+.grid-item {
+  background-color: #282c34;
+  border: 2px solid rgb(0, 0, 0);
 }

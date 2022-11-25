@@ -118,10 +118,13 @@ const Client = (props) => {
 
         {tracks ? renderArtists() : console.log("Empty")}
         <ToastContainer />
-        <br></br>
-        <button className="btn" onClick={sendtomenu}>
-          back to menu
-        </button>
+        <div>
+          <br></br>
+          <br></br>
+          <button className="btn" onClick={sendtomenu}>
+            back to menu
+          </button>
+        </div>
       </header>
     </div>
   );

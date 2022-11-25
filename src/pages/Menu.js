@@ -28,10 +28,6 @@ const Menu = () => {
       <div className="grid-item">
         <button className="btn">Party Chat</button>
       </div>
-
-      <div className="grid-item">
-        <button className="btn">testy boi</button>
-      </div>
     </div>
   );
 };

@@ -1,5 +1,5 @@
-.App {
-  text-align: center;
+.background-boi {
+  background-color: #282c34;
 }
 
 .btn {
@@ -13,21 +13,4 @@
   border-radius: 0.5em;
   border-color: rgb(255, 119, 0);
   flex: 1;
-}
-
-.btn:focus {
-  outline: none;
-}
-
-.btn:active {
-  transform: scale(0.98);
-}
-
-.btn-block {
-  display: block;
-  width: 100%;
-}
-
-.limit {
-  word-wrap: break-word;
 }
