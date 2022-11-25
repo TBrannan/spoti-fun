@@ -2,11 +2,11 @@
   text-align: center;
 }
 
-.grid-skip {
+.grid-current {
   display: grid;
 }
 
-.App-skip-header {
+.App-current-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -22,7 +22,7 @@
   text-align: center;
 }
 
-.skip-limit {
+.current-limit {
   font-size: 20px;
   color: white;
   text-align: center;
@@ -30,19 +30,19 @@
   word-wrap: break-word;
 }
 
-.skip-thumb {
+.current-thumb {
   max-height: 100%;
   line-height: 0;
   overflow: hidden;
 }
 
-.skip-grid-item {
+.current-grid-item {
   background-color: #000000;
   border: 1px solid rgb(0, 0, 0);
   align-items: center;
 }
 
-.skip-grid-container {
+.current-grid-container {
   background-color: rgb(0, 0, 0);
   border: 1px solid rgb(5, 255, 1);
 }

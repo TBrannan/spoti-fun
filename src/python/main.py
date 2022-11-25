@@ -7,14 +7,18 @@ from pydantic import BaseModel
 
 item_dict = {}
 playlist_dict = {}
+skip_dict = {}
 
 class Item(BaseModel):
     token: str
     name: Optional[str] = None
 
-
 class Player(BaseModel):
     playlist:str
+
+class Skip(BaseModel):
+    skip: int
+
 
 app = FastAPI()
 
@@ -41,10 +45,6 @@ async def get_item():
     return item_dict
 
 
-class Player(BaseModel):
-    playlist:str
-
-
 @app.get("/items/playlist/")
 async def get_item():
     return playlist_dict["playlist"]
@@ -57,3 +57,23 @@ async def create_item(item:Player):
         return playlist_dict["playlist"]
     except Exception as e:
         print(e)
+
+
+@app.post("/skip/")
+async def create_item(item:Skip):
+    try:
+        print("Adding Skip Number")
+        print(item.skip)
+        skip_dict.update({"skip": item.skip})
+        return skip_dict["skip"]
+    except Exception as e:
+        print(e)
+
+@app.get("/skip/")
+async def get_item():
+    print(f"length of dict {len(skip_dict)}")
+    print(skip_dict)
+    if len(skip_dict) == 0:
+        return 0
+    else:
+        return skip_dict["skip"]

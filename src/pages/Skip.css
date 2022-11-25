@@ -1,0 +1,16 @@
+.skip-btn {
+  display: block;
+  background: #000;
+  color: #fff;
+  font-size: 15px;
+  font-family: inherit;
+  padding: 20px 50px;
+  border-width: 0.2em;
+  border-radius: 0.5em;
+  border-color: rgb(255, 0, 0);
+  flex: 1;
+}
+
+.skip-center {
+  align-items: center;
+}

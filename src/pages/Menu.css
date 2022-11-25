@@ -46,3 +46,9 @@
 .limit {
   word-wrap: break-word;
 }
+
+.grid-skip-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
