@@ -1,9 +1,22 @@
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import "./User.css";
 import "react-toastify/dist/ReactToastify.css";
 
 const User = () => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const sendtomenu = () => {
+      navigate("/menu");
+    };
+    const loginCheck = async () => {
+      const loggedin = localStorage.getItem("user");
+      loggedin ? sendtomenu() : console.log("Not Logged in");
+    };
+
+    loginCheck();
+  }, [navigate]);
 
   const sendtomenu = () => {
     navigate("/menu");
