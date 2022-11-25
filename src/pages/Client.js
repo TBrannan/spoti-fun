@@ -1,8 +1,8 @@
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import axios from "axios";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import axios from "axios";
+import "react-toastify/dist/ReactToastify.css";
 import "./Client.css";
 
 const Client = (props) => {
@@ -58,31 +58,6 @@ const Client = (props) => {
     });
     toast(name + " Added");
     setTracks("");
-    update_playlist();
-  };
-
-  const update_playlist = async () => {
-    const token = await get_token();
-    const { data } = await axios
-      .get(
-        `https://api.spotify.com/v1/playlists/${process.env.REACT_APP_PLAYLIST_ID}/tracks?`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
-      .catch((err) => {
-        console.log(err);
-      });
-
-    console.log(data.items);
-  };
-
-  const sendtoapi = (playlist) => {
-    axios.post(process.env.REACT_APP_POST_PLAYLIST, {
-      playlist: JSON.stringify(playlist),
-    });
   };
 
   const renderArtists = () => {

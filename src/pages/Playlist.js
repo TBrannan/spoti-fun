@@ -38,6 +38,7 @@ const Playlist = () => {
 
     update_playlist();
   }, []);
+
   const renderArtists = () => {
     return playlist?.map((tracks) => (
       <div

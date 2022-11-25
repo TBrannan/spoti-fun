@@ -1,9 +1,9 @@
 import { Route, Routes } from "react-router-dom";
+import Menu from "./pages/Menu";
+import Playlist from "./pages/Playlist";
 import Login from "./pages/Login";
 import Client from "./pages/Client";
 import "./App.css";
-import Menu from "./pages/Menu";
-import Playlist from "./pages/Playlist";
 
 function App() {
   return (
