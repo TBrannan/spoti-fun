@@ -43,7 +43,9 @@ const Menu = () => {
   return (
     <div className="app">
       <div className="btn">
-        <div className="limit">Welcome to the Party 🎃</div>
+        <div className="limit">
+          Welcome to the Party {localStorage.getItem("user")}! 🎃
+        </div>
       </div>
       <div className="grid-item">
         <button className="btn" onClick={sendtoclient}>
