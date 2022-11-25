@@ -1,10 +1,7 @@
-import { useState } from "react";
 import axios from "axios";
 import "./Skip.css";
 
-const Skip = () => {
-  const [skip, setSkip] = useState("");
-
+const Skip = (props) => {
   const get_skip = async () => {
     const res = await axios.get(process.env.REACT_APP_GET_SKIP, {});
     return res.data;
@@ -20,10 +17,12 @@ const Skip = () => {
     const number = await get_skip();
     const new_number = number + 1;
     console.log("incrementing");
-    console.log(number);
+    console.log(new_number);
+    props.get_skip(new_number);
 
     if (new_number === 5) {
       console.log("Skipping Song");
+      props.get_skip(5);
       sendtoapi(0);
     } else {
       sendtoapi(new_number);
