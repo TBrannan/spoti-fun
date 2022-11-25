@@ -1,8 +1,7 @@
-import { useState } from "react";
-import axios from "axios";
-import { useEffect } from "react";
-import "./Playlist.css";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import "./Playlist.css";
 
 const Playlist = () => {
   const [playlist, setPlaylist] = useState([]);
@@ -61,18 +60,16 @@ const Playlist = () => {
   };
 
   return (
-    <div className="background-boi">
-      <div className="App">
-        <header className="App-header">
-          <h1>Spooky Playlist</h1>
-          {renderArtists()}
-          <div>
-            <button className="btn" onClick={sendtomenu}>
-              back to menu
-            </button>
-          </div>
-        </header>
-      </div>
+    <div className="App">
+      <header className="App-header">
+        <h1>Spooky Playlist</h1>
+        {renderArtists()}
+        <div>
+          <button className="btn" onClick={sendtomenu}>
+            back to menu
+          </button>
+        </div>
+      </header>
     </div>
   );
 };
