@@ -1,0 +1,48 @@
+.App {
+  text-align: center;
+}
+
+.grid-skip {
+  display: grid;
+}
+
+.App-skip-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.waiting {
+  color: white;
+  text-align: center;
+}
+
+.skip-limit {
+  font-size: 20px;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  word-wrap: break-word;
+}
+
+.skip-thumb {
+  max-height: 100%;
+  line-height: 0;
+  overflow: hidden;
+}
+
+.skip-grid-item {
+  background-color: #000000;
+  border: 1px solid rgb(0, 0, 0);
+  align-items: center;
+}
+
+.skip-grid-container {
+  background-color: rgb(0, 0, 0);
+  border: 1px solid rgb(5, 255, 1);
+}

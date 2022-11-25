@@ -7,7 +7,7 @@ import "./App.css";
 
 function App() {
   return (
-    <div className="background-boi">
+    <div>
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/menu" element={<Menu />} />

@@ -63,21 +63,25 @@ const Client = (props) => {
   const renderArtists = () => {
     return tracks.map((tracks) => (
       <div
-        className="grid-container"
+        className="client-grid-container"
         key={tracks.id}
         value={tracks.id}
         onClick={(e) => clicker(e, tracks.id, tracks.name)}
       >
-        <div className="limit">
-          {tracks.name}
-          <br></br>
-          {tracks.artists[0].name}
+        <div className="client-grid-item">
+          <div className="limit">
+            {tracks.name}
+            <br></br>
+            {tracks.artists[0].name}
+          </div>
+          <div className="client-thumb">
+            {tracks.album.images.length ? (
+              <img width={"100"} src={tracks.album.images[0].url} alt="" />
+            ) : (
+              <div>No Image</div>
+            )}
+          </div>
         </div>
-        {tracks.album.images.length ? (
-          <img width={"100%"} src={tracks.album.images[0].url} alt="" />
-        ) : (
-          <div>No Image</div>
-        )}
       </div>
     ));
   };
@@ -91,7 +95,7 @@ const Client = (props) => {
           <button>Search</button>
         </form>
 
-        {tracks ? renderArtists() : console.log("Empty")}
+        {tracks ? renderArtists() : console.log("Rendering Artists")}
         <ToastContainer />
         <div>
           <br></br>

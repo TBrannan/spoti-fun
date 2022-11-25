@@ -69,7 +69,7 @@ function Auth() {
         <h1>Spotify React</h1>
         {!token ? (
           <a
-            href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=playlist-modify-public`}
+            href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=playlist-modify-public user-read-currently-playing`}
           >
             Login to Spotify
           </a>

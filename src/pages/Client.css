@@ -29,5 +29,29 @@
 }
 
 .limit {
+  font-size: 20px;
+  color: white;
+  text-align: center;
+  font-weight: bold;
   word-wrap: break-word;
+}
+
+.client-thumb {
+  max-height: 100%;
+  line-height: 0;
+  overflow: hidden;
+}
+
+.client-grid-item {
+  background-color: #000000;
+  border: 1px solid rgb(0, 0, 0);
+  width: 400px;
+  height: 150px;
+}
+
+.client-grid-container {
+  background-color: rgb(0, 0, 0);
+  border: 1px solid rgb(255, 255, 255);
+  padding: 20px;
+  width: fit-content;
 }

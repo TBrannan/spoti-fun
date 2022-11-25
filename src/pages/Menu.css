@@ -2,6 +2,11 @@
   text-align: center;
 }
 
+.playing {
+  text-align: center;
+  color: white;
+}
+
 .btn {
   display: block;
   background: #000;
@@ -38,17 +43,6 @@
   display: grid;
 }
 
-.grid-item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .limit {
   word-wrap: break-word;
-}
-
-.grid-item {
-  background-color: #282c34;
-  border: 2px solid rgb(0, 0, 0);
 }
