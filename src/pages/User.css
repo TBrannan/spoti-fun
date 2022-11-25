@@ -1,0 +1,58 @@
+.App {
+  text-align: center;
+}
+
+.user-login {
+  text-align: center;
+  color: white;
+}
+
+.btn {
+  display: block;
+  background: #000;
+  color: #fff;
+  font-size: 15px;
+  font-family: inherit;
+  padding: 20px 50px;
+  border-width: 0.2em;
+  border-radius: 0.5em;
+  border-color: rgb(255, 119, 0);
+  flex: 1;
+}
+
+.btn:focus {
+  outline: none;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-block {
+  display: block;
+  width: 100%;
+}
+
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+  }
+}
+
+.grid {
+  display: grid;
+}
+
+.limit {
+  word-wrap: break-word;
+}
+
+.grid-menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-skip {
+  word-wrap: break-word;
+}
