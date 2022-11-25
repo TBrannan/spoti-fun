@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import "./Current.css";
 
 const Current = () => {
@@ -7,32 +8,32 @@ const Current = () => {
   const [playing, setPlaying] = useState([]);
 
   useEffect(() => {
-    // const get_token = async () => {
-    //   const { data } = await axios.get(process.env.REACT_APP_GET_ADDRESS, {});
-    //   setToken(data.token);
-    //   return data.token;
-    // };
+    const get_token = async () => {
+      const { data } = await axios.get(process.env.REACT_APP_GET_ADDRESS, {});
+      setToken(data.token);
+      return data.token;
+    };
 
-    // const update_playlist = async () => {
-    //   const local_token = await get_token();
-    //   const { data } = await axios
-    //     .get(`https://api.spotify.com/v1/me/player/currently-playing`, {
-    //       headers: {
-    //         Authorization: `Bearer ${local_token}`,
-    //       },
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
-    //     });
+    const update_playlist = async () => {
+      const local_token = await get_token();
+      const { data } = await axios
+        .get(`https://api.spotify.com/v1/me/player/currently-playing`, {
+          headers: {
+            Authorization: `Bearer ${local_token}`,
+          },
+        })
+        .catch((err) => {
+          console.log(err);
+        });
 
-    // setPlaying(data.item);
+      setPlaying(data.item);
 
-    // localStorage.setItem("current", JSON.stringify(data.item));
-    // };
-    const data = JSON.parse(localStorage.getItem("current"));
-    setPlaying(data);
+      // localStorage.setItem("current", JSON.stringify(data.item));
+    };
+    // const data = JSON.parse(localStorage.getItem("current"));
+    // setPlaying(data);
 
-    // update_playlist();
+    update_playlist();
   }, []);
 
   const renderNull = () => {
