@@ -1,0 +1,66 @@
+.App {
+  text-align: center;
+}
+
+.btn {
+  display: block;
+  background: #000;
+  color: #fff;
+  font-size: 15px;
+  font-family: inherit;
+  padding: 10px 100px;
+  border-width: 0.2em;
+  border-radius: 0.2em;
+  border-color: rgba(255, 255, 255, 0.252);
+}
+
+.btn:focus {
+  outline: none;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-block {
+  display: block;
+  width: 100%;
+}
+
+.column {
+  float: left;
+  width: 25%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+  }
+}
+
+.grid {
+  display: grid;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: 60px;
+  grid-gap: 20px;
+}
+.grid-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.limit {
+  word-wrap: break-word;
+}

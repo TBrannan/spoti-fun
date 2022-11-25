@@ -2,10 +2,17 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./Client.css";
 
 const Client = (props) => {
   const [token, setToken] = useState("");
   const [tracks, setTracks] = useState([]);
+  const navigate = useNavigate();
+
+  const sendtomenu = () => {
+    navigate("/menu");
+  };
 
   const mobilesearchArtists = async (e) => {
     e.preventDefault();
@@ -68,8 +75,14 @@ const Client = (props) => {
         console.log(err);
       });
 
-    props.getter(data);
+    sendtoapi(data.items);
     setTracks("");
+  };
+
+  const sendtoapi = (playlist) => {
+    axios.post(process.env.REACT_APP_POST_PLAYLIST, {
+      playlist: JSON.stringify(playlist),
+    });
   };
 
   const renderArtists = () => {
@@ -105,6 +118,10 @@ const Client = (props) => {
 
         {tracks ? renderArtists() : console.log("Empty")}
         <ToastContainer />
+        <br></br>
+        <button className="btn" onClick={sendtomenu}>
+          back to menu
+        </button>
       </header>
     </div>
   );
