@@ -57,6 +57,7 @@ const Client = (props) => {
       console.log(err);
     });
     toast(name + " Added");
+    setTracks("");
     update_playlist();
   };
 
@@ -75,8 +76,7 @@ const Client = (props) => {
         console.log(err);
       });
 
-    sendtoapi(data.items);
-    setTracks("");
+    console.log(data.items);
   };
 
   const sendtoapi = (playlist) => {

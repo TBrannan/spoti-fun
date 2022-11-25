@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const Playlist = () => {
   const [playlist, setPlaylist] = useState([]);
+  const [token, setToken] = useState("");
   const navigate = useNavigate();
 
   const sendtomenu = () => {
@@ -13,13 +14,30 @@ const Playlist = () => {
   };
 
   useEffect(() => {
-    const getplaylist = async () => {
-      const data = await axios.get(process.env.REACT_APP_GET_PLAYLIST, {});
-      const something = JSON.parse(data.data);
-      setPlaylist(something.reverse());
+    const get_token = async () => {
+      const { data } = await axios.get(process.env.REACT_APP_GET_ADDRESS, {});
+      setToken(data.token);
+      return data.token;
+    };
+    const update_playlist = async () => {
+      const local_token = await get_token();
+      const { data } = await axios
+        .get(
+          `https://api.spotify.com/v1/playlists/${process.env.REACT_APP_PLAYLIST_ID}/tracks?`,
+          {
+            headers: {
+              Authorization: `Bearer ${local_token}`,
+            },
+          }
+        )
+        .catch((err) => {
+          console.log(err);
+        });
+
+      setPlaylist(data.items.reverse());
     };
 
-    getplaylist();
+    update_playlist();
   }, []);
   const renderArtists = () => {
     return playlist?.map((tracks) => (
