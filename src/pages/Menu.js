@@ -20,7 +20,7 @@ const Menu = () => {
   }, []);
 
   const get_data = (data) => {
-    if (data == 5) {
+    if (data === 5) {
       setSkip("This song is getting Skipped 😂");
     } else {
       setSkip(data + " people want to skip this song");

@@ -6,15 +6,7 @@ function Auth() {
   const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI;
   const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
   const RESPONSE_TYPE = "token";
-
   const [token, setToken] = useState("");
-  const [searchKey, setSearchKey] = useState("");
-  const [artists, setArtists] = useState([]);
-
-  // const getToken = () => {
-  //     let urlParams = new URLSearchParams(window.location.hash.replace("#","?"));
-  //     let token = urlParams.get('access_token');
-  // }
 
   useEffect(() => {
     const hash = window.location.hash;
@@ -50,26 +42,13 @@ function Auth() {
     });
   };
 
-  const renderArtists = () => {
-    return artists.map((artist) => (
-      <div key={artist.id}>
-        {artist.images.length ? (
-          <img width={"100%"} src={artist.images[0].url} alt="" />
-        ) : (
-          <div>No Image</div>
-        )}
-        {artist.name}
-      </div>
-    ));
-  };
-
   return (
     <div className="App">
       <header className="App-header">
         <h1>Spotify React</h1>
         {!token ? (
           <a
-            href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=playlist-modify-public user-read-currently-playing`}
+            href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=playlist-modify-public user-read-currently-playing user-modify-playback-state`}
           >
             Login to Spotify
           </a>

@@ -5,7 +5,6 @@ import "./Playlist.css";
 
 const Playlist = () => {
   const [playlist, setPlaylist] = useState([]);
-  const [token, setToken] = useState("");
   const navigate = useNavigate();
 
   const sendtomenu = () => {
@@ -15,7 +14,6 @@ const Playlist = () => {
   useEffect(() => {
     const get_token = async () => {
       const { data } = await axios.get(process.env.REACT_APP_GET_ADDRESS, {});
-      setToken(data.token);
       return data.token;
     };
     const update_playlist = async () => {

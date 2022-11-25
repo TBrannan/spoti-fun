@@ -1,16 +1,13 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Current.css";
 
 const Current = () => {
-  const [token, setToken] = useState("");
   const [playing, setPlaying] = useState([]);
 
   useEffect(() => {
     const get_token = async () => {
       const { data } = await axios.get(process.env.REACT_APP_GET_ADDRESS, {});
-      setToken(data.token);
       return data.token;
     };
 
