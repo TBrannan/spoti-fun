@@ -49,6 +49,7 @@ const Skip = (props) => {
       // const skip = await get_skip();
       if (number === 3) {
         // skipSong();
+        console.log("Skipping Song");
         sendtoapi("reset", "reset");
       }
     } else {
