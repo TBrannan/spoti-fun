@@ -5,6 +5,7 @@ import "./Playlist.css";
 
 const Playlist = () => {
   const [playlist, setPlaylist] = useState([]);
+  const [song, setSong] = useState([]);
   const navigate = useNavigate();
 
   const sendtomenu = () => {
@@ -12,6 +13,12 @@ const Playlist = () => {
   };
 
   useEffect(() => {
+    const get_song = async () => {
+      const res = await axios.get(process.env.REACT_APP_GET_SONG, {});
+      console.log(res.data);
+      setSong(res.data.song_id);
+    };
+
     const get_token = async () => {
       const { data } = await axios.get(process.env.REACT_APP_GET_ADDRESS, {});
       return data.token;
@@ -35,16 +42,25 @@ const Playlist = () => {
     };
 
     update_playlist();
+    get_song();
   }, []);
 
   const renderArtists = () => {
     return playlist?.map((tracks) => (
       <div
-        className="grid-container"
+        className={
+          tracks.track.id === song
+            ? "playlist-current-grid-container"
+            : "playlist-grid-container"
+        }
         key={tracks.track.id}
         value={tracks.track.id}
       >
-        <div className="limit">
+        <div
+          className={
+            tracks.track.id === song ? console.log("YES") : console.log("NO")
+          }
+        >
           {tracks.track.name}
           <br></br>
           {tracks.track.artists[0].name}

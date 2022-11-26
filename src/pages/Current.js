@@ -25,6 +25,14 @@ const Current = (props) => {
           console.log(err);
         });
 
+      const sendtoapi = async (song_id) => {
+        const response = await axios.post(process.env.REACT_APP_POST_SONG, {
+          song_id: song_id,
+        });
+        return response.data;
+      };
+
+      sendtoapi(data.item.id);
       setPlaying(data.item);
       props.get_song_id(playing.id);
 
@@ -54,7 +62,6 @@ const Current = (props) => {
 
   const renderArtists = () => {
     if (!playing || playing.length === 0) {
-      console.log("null playlist");
       return renderNull();
     } else {
       return (

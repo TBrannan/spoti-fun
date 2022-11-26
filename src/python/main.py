@@ -8,6 +8,7 @@ from pydantic import BaseModel
 item_dict = {}
 playlist_dict = {}
 skip_dict = {}
+current_song = {}
 
 class Item(BaseModel):
     token: str
@@ -20,6 +21,10 @@ class Skip(BaseModel):
     user: str
     song_id: str
     skip: Optional[int] = None
+
+class Current_song(BaseModel):
+    song_id: str
+
 
 
 app = FastAPI()
@@ -102,4 +107,13 @@ def remove_dupes(user,song_id):
 @app.get("/skip/")
 async def get_item():
     return skip_dict
+
+@app.post("/song/")
+async def create_item(item:Current_song):
+    current_song.update({"song_id":item.song_id})
+    return current_song
+
+@app.get("/song/")
+async def get_item():
+    return current_song
 
