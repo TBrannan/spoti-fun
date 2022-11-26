@@ -1,5 +1,5 @@
 # main.py
-
+from badwords import bad
 from typing import Optional
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI
@@ -9,6 +9,7 @@ item_dict = {}
 playlist_dict = {}
 skip_dict = {}
 current_song = {}
+users = {}
 
 class Item(BaseModel):
     token: str
@@ -24,6 +25,9 @@ class Skip(BaseModel):
 
 class Current_song(BaseModel):
     song_id: str
+
+class User(BaseModel):
+    name: str
 
 
 
@@ -116,4 +120,39 @@ async def create_item(item:Current_song):
 @app.get("/song/")
 async def get_item():
     return current_song
+
+def user_dupe(user):
+    try:
+        print(users["name"])
+        if users["name"].lower() ==user.lower():
+            print("Duplicate")
+            return "duplicate"
+        
+        print("Not duplicate")
+
+        if bad in users["name"].lower():
+            print("Very Bad")
+            return "racist"
+    except Exception as e:
+        if user.lower() in bad:
+            print("Very Bad")
+            return "racist"
+        else:
+            pass
+    
+
+@app.post("/user/")
+async def create_item(item:User):
+    dupe_check = user_dupe(item.name)
+    if dupe_check == "duplicate":
+        return True
+    if dupe_check =="racist":
+        return "racist"
+
+    users.update({"name":item.name})
+    return users
+
+@app.get("/users/")
+async def get_item():
+    return users
 

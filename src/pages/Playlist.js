@@ -56,11 +56,7 @@ const Playlist = () => {
         key={tracks.track.id}
         value={tracks.track.id}
       >
-        <div
-          className={
-            tracks.track.id === song ? console.log("YES") : console.log("NO")
-          }
-        >
+        <div>
           {tracks.track.name}
           <br></br>
           {tracks.track.artists[0].name}
