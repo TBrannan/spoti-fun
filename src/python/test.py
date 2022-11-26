@@ -1,5 +1,19 @@
-dic = {"travs":"asdfasdfa"}
+skip_dict ={}
 
-dic.update({"donkey":"asdfasdfa"})
+skip_dict.update({'farter': 'asdfasdfasdfa'})
 
-print(dic)
+
+
+
+def post(user,song_id):
+    try:
+        if skip_dict[user] == song_id:
+            skip_dict["duper"] = "true"
+            print(skip_dict)
+    except Exception as e:
+        pass
+    
+    
+
+
+post("danker", "asdfasdfasdfa")

@@ -61,16 +61,45 @@ async def create_item(item:Player):
         print(e)
 
 
+def check_reset(user,song_id):
+    if user == "reset" and song_id =="reset":
+        print("Resetting")
+
+def notify_once(user,song_id):
+    try:
+        if skip_dict[user] == song_id:
+            print("Duper")
+            return True
+    except Exception as e:
+        print(e)
+
+
 @app.post("/skip/")
 async def create_item(item:Skip):
     try:
-        print({item.user:item.song_id})
+        check_reset(item.user,item.song_id)
+        duper = notify_once(item.user,item.song_id)
+        if duper:
+            return "duper"
+        remove_dupes(item.user,item.song_id)
         skip_dict.update({item.user:item.song_id})
+        number = len(skip_dict)
+        print(f"NUMBER {number}")
+        return number
     except Exception as e:
             print(e)
 
+def remove_dupes(user,song_id):
+    print("Removing old Songs")
+    remove =[]
+    for a,b in skip_dict.items():
+        if song_id != b:
+            remove.append(a)
+    
+    for i in remove:
+        skip_dict.pop(i)
+
 @app.get("/skip/")
 async def get_item():
-    print(f"length of dict {len(skip_dict)}")
     return skip_dict
 

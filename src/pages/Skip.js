@@ -10,11 +10,12 @@ const Skip = (props) => {
     return res.data;
   };
 
-  const sendtoapi = (new_user, song_id) => {
-    axios.post(process.env.REACT_APP_POST_SKIP, {
+  const sendtoapi = async (new_user, song_id) => {
+    const response = await axios.post(process.env.REACT_APP_POST_SKIP, {
       user: new_user,
       song_id: song_id,
     });
+    return response.data;
   };
 
   const get_token = async () => {
@@ -38,45 +39,21 @@ const Skip = (props) => {
       .catch(console.log);
   };
 
-  const evaluate = (skip) => {
-    var arr = [];
-    Object.values(skip).map((value, index) => {
-      arr.push(value);
-      return 0;
-    });
-
-    arr.forEach(function (x) {
-      arr[x] = (arr[x] || 0) + 1;
-    });
-    console.log(arr[id]);
-    if (arr[id] >= 3) {
-      props.get_skip(3);
-      console.log("Skipping Song");
-    }
-  };
-
   const voteskip = async () => {
     const song_id = props.get_song_id;
     setid(song_id);
     const user_id = localStorage.getItem("user");
-    sendtoapi(user_id, song_id);
-    const skip = await get_skip();
-    evaluate(skip);
-    // const number = await get_skip();
-    // console.log(number);
-    // const new_number = number + 1;
-    // console.log("incrementing");
-    // console.log(new_number);
-    // props.get_skip(new_number);
-
-    // if (new_number === 5) {
-    //   console.log("Skipping Song");
-    //   props.get_skip(5);
-    //   sendtoapi(0);
-    //   // skipSong();
-    // } else {
-    //   sendtoapi(new_number);
-    // }
+    const number = await sendtoapi(user_id, song_id);
+    if (number !== "duper") {
+      props.get_skip(number);
+      // const skip = await get_skip();
+      if (number === 3) {
+        // skipSong();
+        sendtoapi("reset", "reset");
+      }
+    } else {
+      props.toaster();
+    }
   };
   return (
     <div className="skip-app">
