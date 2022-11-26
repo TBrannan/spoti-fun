@@ -9,22 +9,50 @@ import "./Menu.css";
 
 const Menu = () => {
   const [skipNumber, setSkip] = useState([]);
+  const [id, setid] = useState("");
 
   useEffect(() => {
     const get_skip = async () => {
       const res = await axios.get(process.env.REACT_APP_GET_SKIP, {});
-      setSkip(res.data + " people want to skip this song");
+      const skip = res.data;
+      const len = Object.keys(skip).length;
+      if (!len) {
+        setSkip(0 + " people want to skip this song");
+      } else {
+        const skipnumber = evaluate(skip);
+        console.log(skipnumber);
+      }
+    };
+
+    const evaluate = (skip) => {
+      var arr = [];
+      Object.values(skip).map((value, index) => {
+        arr.push(value);
+        get_count(arr);
+      });
+    };
+
+    const get_count = (arr) => {
+      arr.forEach(function (x) {
+        arr[x] = (arr[x] || 0) + 1;
+      });
+      console.log(arr[id]);
+      setSkip(arr[id] + " people want to skip this song");
     };
 
     get_skip();
   }, []);
 
   const get_data = (data) => {
-    if (data === 5) {
+    if (data === 3) {
       setSkip("This song is getting Skipped 😂");
     } else {
       setSkip(data + " people want to skip this song");
     }
+  };
+
+  const get_id = (id) => {
+    setid(id);
   };
 
   const navigate = useNavigate();
@@ -67,10 +95,10 @@ const Menu = () => {
       <ToastContainer />
       <br></br>
       <p className="limit">Currently Playing</p>
-      <Current />
+      <Current get_song_id={get_id} />
       <br></br>
       <div className="grid-menu-item">
-        <Skip get_skip={get_data} />
+        <Skip get_skip={get_data} get_song_id={id} />
       </div>
       <div className="limit">{skipNumber}</div>
     </div>

@@ -2,10 +2,11 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import "./Current.css";
 
-const Current = () => {
+const Current = (props) => {
   const [playing, setPlaying] = useState([]);
 
   useEffect(() => {
+    // Inhouse API
     const get_token = async () => {
       const { data } = await axios.get(process.env.REACT_APP_GET_ADDRESS, {});
       return data.token;
@@ -24,14 +25,16 @@ const Current = () => {
         });
 
       setPlaying(data.item);
+      props.get_song_id(playing.id);
 
-      // localStorage.setItem("current", JSON.stringify(data.item));
+      localStorage.setItem("current", JSON.stringify(data.item));
     };
-    // const data = JSON.parse(localStorage.getItem("current"));
-    // setPlaying(data);
+    const data = JSON.parse(localStorage.getItem("current"));
+    setPlaying(data);
+    props.get_song_id(playing.id);
 
-    update_playlist();
-  }, []);
+    // update_playlist();
+  }, [props, playing.id]);
 
   const renderNull = () => {
     return (

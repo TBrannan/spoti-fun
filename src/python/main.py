@@ -17,7 +17,9 @@ class Player(BaseModel):
     playlist:str
 
 class Skip(BaseModel):
-    skip: int
+    user: str
+    song_id: str
+    skip: Optional[int] = None
 
 
 app = FastAPI()
@@ -62,18 +64,13 @@ async def create_item(item:Player):
 @app.post("/skip/")
 async def create_item(item:Skip):
     try:
-        print("Adding Skip Number")
-        print(item.skip)
-        skip_dict.update({"skip": item.skip})
-        return skip_dict["skip"]
+        print({item.user:item.song_id})
+        skip_dict.update({item.user:item.song_id})
     except Exception as e:
-        print(e)
+            print(e)
 
 @app.get("/skip/")
 async def get_item():
     print(f"length of dict {len(skip_dict)}")
-    print(skip_dict)
-    if len(skip_dict) == 0:
-        return 0
-    else:
-        return skip_dict["skip"]
+    return skip_dict
+
