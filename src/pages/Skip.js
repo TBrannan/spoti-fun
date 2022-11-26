@@ -35,7 +35,6 @@ const Skip = (props) => {
 
     axios
       .post(process.env.REACT_APP_SKIP, bodyParameters, config)
-      .then(console.log)
       .catch(console.log);
   };
 
@@ -48,7 +47,7 @@ const Skip = (props) => {
       props.get_skip(number);
       // const skip = await get_skip();
       if (number === 3) {
-        // skipSong();
+        skipSong();
         console.log("Skipping Song");
         sendtoapi("reset", "reset");
       }

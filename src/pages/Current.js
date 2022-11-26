@@ -27,13 +27,13 @@ const Current = (props) => {
       setPlaying(data.item);
       props.get_song_id(playing.id);
 
-      localStorage.setItem("current", JSON.stringify(data.item));
+      // localStorage.setItem("current", JSON.stringify(data.item));
     };
-    const data = JSON.parse(localStorage.getItem("current"));
-    setPlaying(data);
+    // const data = JSON.parse(localStorage.getItem("current"));
+    // setPlaying(data);
     props.get_song_id(playing.id);
 
-    // update_playlist();
+    update_playlist();
   }, [props, playing.id]);
 
   const renderNull = () => {

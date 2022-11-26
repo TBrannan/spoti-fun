@@ -1,9 +1,8 @@
 import { ToastContainer, toast } from "react-toastify";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Current from "./Current";
 import Skip from "./Skip";
-import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
 import "./Menu.css";
 
@@ -14,7 +13,7 @@ const Menu = () => {
   const get_data = (data) => {
     if (data === 3) {
       setSkip("This song is getting Skipped 😂");
-    } else if (data == 1) {
+    } else if (data === 1) {
       setSkip(data + " person want to skip this song");
     } else {
       setSkip(data + " people want to skip this song");
