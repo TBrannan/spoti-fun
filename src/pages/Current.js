@@ -20,6 +20,7 @@ const Current = (props) => {
             Authorization: `Bearer ${local_token}`,
           },
         })
+        .then(console.log("Calling API"))
         .catch((err) => {
           console.log(err);
         });
@@ -31,10 +32,12 @@ const Current = (props) => {
     };
     // const data = JSON.parse(localStorage.getItem("current"));
     // setPlaying(data);
-    props.get_song_id(playing.id);
 
     update_playlist();
-  }, [props, playing.id]);
+    props.get_song_id(playing.id);
+
+    // eslint-disable-next-line
+  }, [playing.id]);
 
   const renderNull = () => {
     return (

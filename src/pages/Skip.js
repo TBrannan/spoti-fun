@@ -1,14 +1,11 @@
-import { useState } from "react";
 import axios from "axios";
 import "./Skip.css";
 
 const Skip = (props) => {
-  const [id, setid] = useState("");
-
-  const get_skip = async () => {
-    const res = await axios.get(process.env.REACT_APP_GET_SKIP, {});
-    return res.data;
-  };
+  // const get_skip = async () => {
+  //   const res = await axios.get(process.env.REACT_APP_GET_SKIP, {});
+  //   return res.data;
+  // };
 
   const sendtoapi = async (new_user, song_id) => {
     const response = await axios.post(process.env.REACT_APP_POST_SKIP, {
@@ -40,7 +37,7 @@ const Skip = (props) => {
 
   const voteskip = async () => {
     const song_id = props.get_song_id;
-    setid(song_id);
+    console.log(song_id);
     const user_id = localStorage.getItem("user");
     const number = await sendtoapi(user_id, song_id);
     if (number !== "duper") {
