@@ -1,6 +1,7 @@
 import { ToastContainer, toast } from "react-toastify";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import Current from "./Current";
 import Skip from "./Skip";
 import "react-toastify/dist/ReactToastify.css";
@@ -9,6 +10,21 @@ import "./Menu.css";
 const Menu = () => {
   const [skipNumber, setSkip] = useState([]);
   const [id, setid] = useState("");
+
+  useEffect(() => {
+    const get_skip = async () => {
+      const res = await axios.get(process.env.REACT_APP_SKIPPER, {});
+      get_data(res.data);
+    };
+    get_skip();
+  }, []);
+
+  const send_skip = async (skip) => {
+    const response = await axios.post(process.env.REACT_APP_SKIPPER, {
+      skipnumber: skip,
+    });
+    get_data(response.data);
+  };
 
   const get_data = (data) => {
     if (data === 3) {
@@ -74,7 +90,7 @@ const Menu = () => {
       <Current get_song_id={get_id} />
       <br></br>
       <div className="grid-menu-item">
-        <Skip get_skip={get_data} get_song_id={id} toaster={send_toast} />
+        <Skip get_skip={send_skip} get_song_id={id} toaster={send_toast} />
       </div>
       <div className="limit">{skipNumber}</div>
     </div>

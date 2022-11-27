@@ -16,7 +16,6 @@ const Skip = (props) => {
   };
 
   const sendtoapi = async (new_user, song_id) => {
-    console.log(new_user, song_id);
     const response = await axios.post(process.env.REACT_APP_POST_SKIP, {
       user: new_user,
       song_id: song_id,
@@ -58,6 +57,7 @@ const Skip = (props) => {
         skipSong();
         console.log("Skipping Song");
         sendtoapi("reset", "reset");
+        props.get_skip(0);
       }
     } else {
       props.toaster();
