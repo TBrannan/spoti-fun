@@ -13,6 +13,7 @@ skip_dict = {}
 current_song = {}
 users = {}
 msg = {}
+skip_number = {}
 
 class Item(BaseModel):
     token: str
@@ -31,6 +32,9 @@ class Current_song(BaseModel):
 
 class User(BaseModel):
     name: str
+
+class SkipNumber(BaseModel):
+    skipnumber: int
 
 class Message(BaseModel):
     stamp:str
@@ -101,7 +105,6 @@ async def create_item(item:Skip):
         remove_dupes(item.user,item.song_id)
         skip_dict.update({item.user:item.song_id})
         number = len(skip_dict)
-        print(f"NUMBER {number}")
         return number
     except Exception as e:
             print(e)
@@ -181,3 +184,18 @@ async def create_item(item:Message):
 async def get_item():
     msg_list = add_to_list(msg)
     return msg_list
+
+
+@app.post("/skipnumber/")
+async def create_item(item:SkipNumber):
+    print(item.skipnumber)
+    skip_number.update({"skipnumber":item.skipnumber})
+    return skip_number["skipnumber"]
+
+@app.get("/skipnumber/")
+async def get_item():
+    try:
+        print(skip_number)
+        return skip_number["skipnumber"]
+    except Exception as e:
+        return 0
