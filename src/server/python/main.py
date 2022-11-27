@@ -35,6 +35,7 @@ class User(BaseModel):
 
 class SkipNumber(BaseModel):
     skipnumber: int
+    song_id:str
 
 class Message(BaseModel):
     stamp:str
@@ -189,13 +190,12 @@ async def get_item():
 @app.post("/skipnumber/")
 async def create_item(item:SkipNumber):
     print(item.skipnumber)
-    skip_number.update({"skipnumber":item.skipnumber})
-    return skip_number["skipnumber"]
+    skip_number.update({"skipnumber":item.skipnumber,"song_id":item.song_id})
+    return skip_number
 
 @app.get("/skipnumber/")
 async def get_item():
     try:
-        print(skip_number)
-        return skip_number["skipnumber"]
+        return skip_number
     except Exception as e:
         return 0

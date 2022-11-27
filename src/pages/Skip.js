@@ -1,4 +1,3 @@
-import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
@@ -52,7 +51,6 @@ const Skip = (props) => {
     const number = await sendtoapi(user_id, song_id);
     if (number !== "duper") {
       props.get_skip(number);
-      // const skip = await get_skip();
       if (number === 3) {
         skipSong();
         console.log("Skipping Song");

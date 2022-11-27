@@ -11,22 +11,25 @@ const Menu = () => {
   const [skipNumber, setSkip] = useState([]);
   const [id, setid] = useState("");
 
-  useEffect(() => {
-    const get_skip = async () => {
-      const res = await axios.get(process.env.REACT_APP_SKIPPER, {});
-      get_data(res.data);
-    };
-    get_skip();
-  }, []);
+  const get_skip = async (song_id) => {
+    const res = await axios.get(process.env.REACT_APP_SKIPPER, {});
+    if (song_id !== res.data.song_id) {
+      get_data(0);
+    } else {
+      get_data(res.data.skipnumber);
+    }
+  };
 
   const send_skip = async (skip) => {
     const response = await axios.post(process.env.REACT_APP_SKIPPER, {
       skipnumber: skip,
+      song_id: id,
     });
-    get_data(response.data);
+    get_data(response.data.skipnumber);
   };
 
   const get_data = (data) => {
+    console.log(data);
     if (data === 3) {
       setSkip("This song is getting Skipped 😂");
     } else if (data === 1) {
@@ -38,6 +41,7 @@ const Menu = () => {
 
   const get_id = (id) => {
     setid(id);
+    get_skip(id);
   };
 
   const navigate = useNavigate();
