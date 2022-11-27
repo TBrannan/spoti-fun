@@ -4,7 +4,7 @@
 /.pnp
 .pnp.js
 .env
-badwords.pw
+badwords.py
 node_modules
 
 # testing
