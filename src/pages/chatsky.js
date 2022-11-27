@@ -1,7 +1,7 @@
 import "./Chatsky.css";
 import io from "socket.io-client";
 import { useState } from "react";
-import Chat1 from "./Chat1";
+import Chat from "./Chat";
 
 const socket = io.connect(process.env.REACT_APP_CHAT);
 
@@ -42,7 +42,7 @@ function Chatsky() {
           <button onClick={joinRoom()}>Join A Room</button>
         </div>
       ) : (
-        <Chat1 socket={socket} username={username} room={room} />
+        <Chat socket={socket} username={username} room={room} />
       )}
     </div>
   );

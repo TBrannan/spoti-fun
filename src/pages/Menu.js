@@ -96,6 +96,7 @@ const Menu = () => {
       <div className="grid-menu-item">
         <Skip get_skip={send_skip} get_song_id={id} toaster={send_toast} />
       </div>
+      <br></br>
       <div className="limit">{skipNumber}</div>
     </div>
   );

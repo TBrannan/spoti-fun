@@ -177,7 +177,7 @@ def add_to_list(msg):
 @app.post("/chat/")
 async def create_item(item:Message):
     print(item.stamp,item.name,item.message)
-    msg.update({item.stamp:{"stamp":item.stamp,"name":item.name,"message":item.message}})
+    msg.update({item.stamp:{"time":item.stamp,"author":item.name,"message":item.message}})
     msg_list = add_to_list(msg)
     return msg_list
 
