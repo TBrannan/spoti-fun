@@ -55,7 +55,6 @@ const Skip = (props) => {
         skipSong();
         console.log("Skipping Song");
         sendtoapi("reset", "reset");
-        props.get_skip(0);
       }
     } else {
       props.toaster();
