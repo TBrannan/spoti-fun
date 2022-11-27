@@ -33,8 +33,8 @@ const Menu = () => {
     navigate("/playlist");
   };
 
-  const partytime = () => {
-    toast("PARTY PISSER ACTIVATED 💦💦💦");
+  const sendtochat = () => {
+    navigate("/chat");
   };
 
   const send_toast = () => {
@@ -64,7 +64,7 @@ const Menu = () => {
       </div>
 
       <div className="grid-item">
-        <button className="btn" onClick={partytime}>
+        <button className="btn" onClick={sendtochat}>
           Party Chat
         </button>
       </div>

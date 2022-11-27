@@ -1,19 +1,7 @@
-skip_dict ={}
-
-skip_dict.update({'farter': 'asdfasdfasdfa'})
+msg = {'1669494233347': {'name': 'Travis', 'message': 'stunky'}, '1669494234821': {'name': 'Travis', 'message': 'stunky'}, '1669494238299': {'name': 'Travis', 'message': 'stunky'}}
 
 
 
 
-def post(user,song_id):
-    try:
-        if skip_dict[user] == song_id:
-            skip_dict["duper"] = "true"
-            print(skip_dict)
-    except Exception as e:
-        pass
-    
-    
-
-
-post("danker", "asdfasdfasdfa")
+for i in msg.values():
+    print(i)

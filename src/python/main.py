@@ -1,15 +1,18 @@
 # main.py
 from badwords import bad
-from typing import Optional
+from typing import Optional, List
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi import FastAPI
+from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from pydantic import BaseModel
+from datetime import datetime
+import json
 
 item_dict = {}
 playlist_dict = {}
 skip_dict = {}
 current_song = {}
 users = {}
+msg = {}
 
 class Item(BaseModel):
     token: str
@@ -29,6 +32,11 @@ class Current_song(BaseModel):
 class User(BaseModel):
     name: str
 
+class Message(BaseModel):
+    stamp:str
+    name: str
+    message:str
+
 
 
 app = FastAPI()
@@ -36,12 +44,12 @@ app = FastAPI()
 origins = ["*"]
 
 app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+        CORSMiddleware,
+        allow_origins=["*"],
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
 
 @app.post("/items/")
 async def create_item(item:Item):
@@ -156,3 +164,20 @@ async def create_item(item:User):
 async def get_item():
     return users
 
+def add_to_list(msg):
+    msg_list =[]
+    for i in msg.values():
+        msg_list.append(i)
+    return msg_list
+
+@app.post("/chat/")
+async def create_item(item:Message):
+    print(item.stamp,item.name,item.message)
+    msg.update({item.stamp:{"stamp":item.stamp,"name":item.name,"message":item.message}})
+    msg_list = add_to_list(msg)
+    return msg_list
+
+@app.get("/chat/")
+async def get_item():
+    msg_list = add_to_list(msg)
+    return msg_list
