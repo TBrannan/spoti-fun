@@ -5,10 +5,10 @@ import axios from "axios";
 import "./User.css";
 import "react-toastify/dist/ReactToastify.css";
 
-const User = () => {
+const Hacks = () => {
   const navigate = useNavigate();
-
   useEffect(() => {
+    toast("🎉🎉🎉 Bix Hax Activated");
     const sendtomenu = () => {
       navigate("/menu");
     };
@@ -24,6 +24,7 @@ const User = () => {
     console.log(unique_user);
     const response = await axios.post(process.env.REACT_APP_POST_USER, {
       name: unique_user,
+      mod: true,
     });
     console.log(response.data);
     if (response.data === true) {
@@ -31,6 +32,8 @@ const User = () => {
         'Please choose another user name "' + unique_user + '" already exists'
       );
       return "dupe";
+    } else if (response.data === "mod") {
+      toast("You cant' keep hacking, choose a mod name now lol");
     } else if (response.data === "racist") {
       toast(
         "hey, " +
@@ -41,6 +44,7 @@ const User = () => {
       sendtohacks();
     } else {
       localStorage.setItem("user", unique_user);
+      localStorage.setItem("mod", true);
       console.log(response.data);
       sendtomenu();
     }
@@ -66,9 +70,9 @@ const User = () => {
       <ToastContainer />
       <div className="app">
         <div className="btn">
-          <div className="limit">Welcome to the Party 🎃</div>
+          <div className="limit">You have been Chosen as a Moderator</div>
         </div>
-        <h1 className="limit">Add your Nickname</h1>
+        <h1 className="limit">Add your Mod Name</h1>
         <form onSubmit={get_user}>
           <input type="text" />
           <button>Submit</button>
@@ -78,4 +82,4 @@ const User = () => {
   );
 };
 
-export default User;
+export default Hacks;

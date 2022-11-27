@@ -32,6 +32,7 @@ class Current_song(BaseModel):
 
 class User(BaseModel):
     name: str
+    mod: Optional[str] = False
 
 class SkipNumber(BaseModel):
     skipnumber: int
@@ -155,6 +156,8 @@ def user_dupe(user):
 
 @app.post("/user/")
 async def create_item(item:User):
+    if item.name=="thebighax":
+        return "mod"
     dupe_check = user_dupe(item.name)
     if dupe_check == "duplicate":
         return True

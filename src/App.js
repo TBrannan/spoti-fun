@@ -5,6 +5,7 @@ import Login from "./pages/Login";
 import Client from "./pages/Client";
 import User from "./pages/User";
 import Chatsky from "./pages/chatsky";
+import Hacks from "./pages/Hacks";
 
 import "./App.css";
 
@@ -19,6 +20,7 @@ function App() {
         <Route path="/api/callback/*" element={<Login />} />
         <Route path="/playlist" element={<Playlist />} />
         <Route path="/chat" element={<Chatsky />} />
+        <Route path="/hacks" element={<Hacks />} />
       </Routes>
     </div>
   );

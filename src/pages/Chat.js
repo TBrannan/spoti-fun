@@ -10,6 +10,9 @@ function Chat1({ socket, username, room }) {
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (!username) {
+      navigate("/user");
+    }
     const get_chat = async () => {
       const response = await axios.get(process.env.REACT_APP_GET_CHAT, {});
 
@@ -27,7 +30,6 @@ function Chat1({ socket, username, room }) {
       name: name,
       message: msg,
     });
-    // console.log(response.data);
     setMessageList(response.data);
   };
 
@@ -65,6 +67,16 @@ function Chat1({ socket, username, room }) {
     }
   };
 
+  const mods = (user) => {
+    if (localStorage.getItem("mod")) {
+      return "mod";
+    } else if (username === user) {
+      return "you";
+    } else {
+      return "other";
+    }
+  };
+
   return (
     <div className="chat-window">
       <div className="chat-header">
@@ -76,7 +88,8 @@ function Chat1({ socket, username, room }) {
             return (
               <div
                 className="message"
-                id={username === messageContent.author ? "you" : "other"}
+                id={mods(messageContent.author)}
+                // id={username === messageContent.author ? "you" : "other"}
               >
                 <div>
                   <div className="message-content">

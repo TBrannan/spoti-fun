@@ -141,6 +141,20 @@ body {
   margin-right: 5px;
 }
 
+#mod {
+  justify-content: flex-end;
+}
+
+#mod .message-content {
+  justify-content: flex-end;
+  background-color: rgb(255, 0, 0);
+}
+
+#mod .message-meta {
+  justify-content: flex-end;
+  margin-right: 5px;
+}
+
 .message-meta #author {
   margin-left: 10px;
   font-weight: bold;
