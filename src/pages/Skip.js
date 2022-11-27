@@ -1,13 +1,22 @@
+import { ToastContainer, toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import "react-toastify/dist/ReactToastify.css";
 import "./Skip.css";
 
 const Skip = (props) => {
+  const navigate = useNavigate();
   // const get_skip = async () => {
   //   const res = await axios.get(process.env.REACT_APP_GET_SKIP, {});
   //   return res.data;
   // };
 
+  const sendtologin = () => {
+    navigate("/user");
+  };
+
   const sendtoapi = async (new_user, song_id) => {
+    console.log(new_user, song_id);
     const response = await axios.post(process.env.REACT_APP_POST_SKIP, {
       user: new_user,
       song_id: song_id,
@@ -37,8 +46,10 @@ const Skip = (props) => {
 
   const voteskip = async () => {
     const song_id = props.get_song_id;
-    console.log(song_id);
     const user_id = localStorage.getItem("user");
+    if (!user_id) {
+      sendtologin();
+    }
     const number = await sendtoapi(user_id, song_id);
     if (number !== "duper") {
       props.get_skip(number);
@@ -52,6 +63,7 @@ const Skip = (props) => {
       props.toaster();
     }
   };
+
   return (
     <div className="skip-app">
       <button className="skip-btn" onClick={voteskip}>

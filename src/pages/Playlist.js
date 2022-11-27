@@ -15,7 +15,6 @@ const Playlist = () => {
   useEffect(() => {
     const get_song = async () => {
       const res = await axios.get(process.env.REACT_APP_GET_SONG, {});
-      console.log(res.data);
       setSong(res.data.song_id);
     };
 

@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import ScrollToBottom from "react-scroll-to-bottom";
+import "./Chat.css";
 
 function Chat1({ socket, username, room }) {
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
+  const navigate = useNavigate();
 
   const sendMessage = async () => {
     if (currentMessage !== "") {
@@ -29,6 +32,10 @@ function Chat1({ socket, username, room }) {
       setMessageList((list) => [...list, data]);
     });
   }, [socket]);
+
+  const sendtomenu = () => {
+    navigate("/menu");
+  };
 
   return (
     <div className="chat-window">
@@ -70,6 +77,13 @@ function Chat1({ socket, username, room }) {
           }}
         />
         <button onClick={sendMessage}>&#9658;</button>
+      </div>
+      <br></br>
+      <br></br>
+      <div className="box">
+        <button className="btn" onClick={sendtomenu}>
+          back to menu
+        </button>
       </div>
     </div>
   );

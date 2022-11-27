@@ -31,3 +31,47 @@
     @apply bg-white dark:bg-gray-900;
   }
 }
+
+.btn {
+  display: block;
+  background: #000;
+  color: #fff;
+  font-size: 15px;
+  font-family: inherit;
+  padding: 20px 50px;
+  border-width: 0.2em;
+  border-radius: 0.5em;
+  border-color: rgb(255, 119, 0);
+  flex: 1;
+}
+
+.btn:focus {
+  outline: none;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-block {
+  display: block;
+  width: 100%;
+}
+
+.box {
+  display: block;
+  padding: 10px 40px;
+}
+
+.box-btn:focus {
+  outline: none;
+}
+
+.box-btn:active {
+  transform: scale(0.98);
+}
+
+.box-btn-block {
+  display: block;
+  width: 100%;
+}
