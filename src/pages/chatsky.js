@@ -8,10 +8,13 @@ const socket = io.connect(process.env.REACT_APP_CHAT);
 function Chatsky() {
   const [username, setUsername] = useState("");
   const [room, setRoom] = useState("");
-  const [showChat, setShowChat] = useState(false);
+  const [showChat, setShowChat] = useState("");
 
   const joinRoom = () => {
+    setUsername(localStorage.getItem("user"));
+    setRoom("party");
     if (username !== "" && room !== "") {
+      setUsername(localStorage.getItem("user"));
       socket.emit("join_room", room);
       setShowChat(true);
     }
@@ -36,7 +39,7 @@ function Chatsky() {
               setRoom(event.target.value);
             }}
           />
-          <button onClick={joinRoom}>Join A Room</button>
+          <button onClick={joinRoom()}>Join A Room</button>
         </div>
       ) : (
         <Chat1 socket={socket} username={username} room={room} />

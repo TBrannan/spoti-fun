@@ -4,7 +4,6 @@ import Playlist from "./pages/Playlist";
 import Login from "./pages/Login";
 import Client from "./pages/Client";
 import User from "./pages/User";
-import Chat from "./pages/Chat";
 import Chatsky from "./pages/chatsky";
 
 import "./App.css";
