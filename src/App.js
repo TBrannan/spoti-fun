@@ -6,6 +6,7 @@ import Client from "./pages/Client";
 import User from "./pages/User";
 import Chatsky from "./pages/chatsky";
 import Hacks from "./pages/Hacks";
+import Mod from "./pages/Mod";
 
 import "./App.css";
 
@@ -21,6 +22,7 @@ function App() {
         <Route path="/playlist" element={<Playlist />} />
         <Route path="/chat" element={<Chatsky />} />
         <Route path="/hacks" element={<Hacks />} />
+        <Route path="/mod" element={<Mod />} />
       </Routes>
     </div>
   );

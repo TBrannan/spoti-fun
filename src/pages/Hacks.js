@@ -8,7 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 const Hacks = () => {
   const navigate = useNavigate();
   useEffect(() => {
-    toast("🎉🎉🎉 Bix Hax Activated");
+    toast("🎉🎉🎉 Big Hax Activated");
     const sendtomenu = () => {
       navigate("/menu");
     };

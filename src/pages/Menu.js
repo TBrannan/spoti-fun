@@ -57,6 +57,10 @@ const Menu = () => {
     navigate("/chat");
   };
 
+  const sendtomod = () => {
+    navigate("/mod");
+  };
+
   const send_toast = () => {
     toast(
       "You can only vote once per song..." +
@@ -87,6 +91,15 @@ const Menu = () => {
         <button className="btn" onClick={sendtochat}>
           Party Chat
         </button>
+      </div>
+      <div className="grid-item">
+        {localStorage.getItem("mod") ? (
+          <button className="btn" onClick={sendtomod}>
+            Moderators Only
+          </button>
+        ) : (
+          ""
+        )}
       </div>
       <ToastContainer />
       <br></br>
