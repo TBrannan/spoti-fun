@@ -42,6 +42,7 @@ class Message(BaseModel):
     stamp:str
     name: str
     message:str
+    mod: Optional[str] = False
 
 
 
@@ -157,14 +158,14 @@ def user_dupe(user):
 @app.post("/user/")
 async def create_item(item:User):
     if item.name=="thebighax":
-        return "mod"
+        return {"mod":True}
     dupe_check = user_dupe(item.name)
     if dupe_check == "duplicate":
-        return True
+        return {"duplicate":True}
     if dupe_check =="racist":
-        return "racist"
+        return {"racist":True}
 
-    users.update({"name":item.name})
+    users.update({"name":item.name,"mod":item.mod})
     return users
 
 @app.get("/users/")
@@ -179,8 +180,8 @@ def add_to_list(msg):
 
 @app.post("/chat/")
 async def create_item(item:Message):
-    print(item.stamp,item.name,item.message)
-    msg.update({item.stamp:{"time":item.stamp,"author":item.name,"message":item.message}})
+    print(item.stamp,item.name,item.message,item.mod)
+    msg.update({item.stamp:{"time":item.stamp,"author":item.name,"message":item.message,"mod":item.mod}})
     msg_list = add_to_list(msg)
     return msg_list
 

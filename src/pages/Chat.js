@@ -29,7 +29,9 @@ function Chat1({ socket, username, room }) {
       stamp: Date.now().toString(),
       name: name,
       message: msg,
+      mod: localStorage.getItem("mod"),
     });
+    console.log(response.data);
     setMessageList(response.data);
   };
 
@@ -43,6 +45,7 @@ function Chat1({ socket, username, room }) {
           new Date(Date.now()).getHours() +
           ":" +
           new Date(Date.now()).getMinutes(),
+        mod: localStorage.getItem("mod"),
       };
 
       await socket.emit("send_message", messageData);
@@ -68,9 +71,9 @@ function Chat1({ socket, username, room }) {
   };
 
   const mods = (user) => {
-    if (localStorage.getItem("mod")) {
+    if (user.mod) {
       return "mod";
-    } else if (username === user) {
+    } else if (username === user.author) {
       return "you";
     } else {
       return "other";
@@ -88,7 +91,7 @@ function Chat1({ socket, username, room }) {
             return (
               <div
                 className="message"
-                id={mods(messageContent.author)}
+                id={mods(messageContent)}
                 // id={username === messageContent.author ? "you" : "other"}
               >
                 <div>

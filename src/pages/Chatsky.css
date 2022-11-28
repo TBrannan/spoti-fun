@@ -147,10 +147,12 @@ body {
 
 #mod .message-content {
   justify-content: flex-end;
-  background-color: rgb(255, 0, 0);
+  background-color: cornflowerblue;
 }
 
 #mod .message-meta {
+  color: red;
+  font-weight: bold;
   justify-content: flex-end;
   margin-right: 5px;
 }

@@ -26,26 +26,23 @@ const Hacks = () => {
       name: unique_user,
       mod: true,
     });
-    console.log(response.data);
-    if (response.data === true) {
+    console.log(response);
+    if (response.duplicate === true) {
       toast(
         'Please choose another user name "' + unique_user + '" already exists'
       );
       return "dupe";
-    } else if (response.data === "mod") {
+    } else if (response.mod === true) {
       toast("You cant' keep hacking, choose a mod name now lol");
-    } else if (response.data === "racist") {
+    } else if (response.racist === true) {
       toast(
         "hey, " +
           unique_user +
           ", Please don't be racist and choose another name"
       );
-    } else if (response.data === "mod") {
-      sendtohacks();
     } else {
       localStorage.setItem("user", unique_user);
       localStorage.setItem("mod", true);
-      console.log(response.data);
       sendtomenu();
     }
   };

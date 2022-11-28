@@ -26,18 +26,18 @@ const User = () => {
       name: unique_user,
     });
     console.log(response.data);
-    if (response.data === true) {
+    if (response.data.duplicate === true) {
       toast(
         'Please choose another user name "' + unique_user + '" already exists'
       );
       return "dupe";
-    } else if (response.data === "racist") {
+    } else if (response.data.racist === true) {
       toast(
         "hey, " +
           unique_user +
           ", Please don't be racist and choose another name"
       );
-    } else if (response.data === "mod") {
+    } else if (response.data.mod === true) {
       sendtohacks();
     } else {
       localStorage.setItem("user", unique_user);
