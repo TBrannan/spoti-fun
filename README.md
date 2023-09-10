@@ -22,6 +22,7 @@ Navigate to the server/python location and run <br>
 You will need to create a `.env` file and add your variables there.
 I created a .env-template as an example.
 Anywhere in the code where you see `env.proccess.REACT_APP_*` it will need to be in the .env file.
+You may need to change localhost to your ipv4 address
 
 ### `npm run build`
 
