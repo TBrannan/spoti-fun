@@ -6,20 +6,22 @@ FastAPI manages the request calls and socket.io manages the live chat
 ## Available Scripts
 
 ### `npm start`
-You will need to run npm start in two directories, one for react and another for socket.io <br> 
-npm start in the root `spoti-fun` folder<br> 
+
+You will need to run npm start in two directories, one for react and another for socket.io <br>
+npm start in the root `spoti-fun` folder<br>
 and npm start in the `server` folder
 
 ### `FASAPI`
+
 You will also need to run the python script that manages the backend http requets<br>
 Navigate to the server/python location and run <br>
-```uvicorn main:app --reload```
+`uvicorn main:app --host <IP> --port 8000`
 
 ### `environment variables`
-You will need to create a `.env` file and add your variables there. 
-I created a .env-template as an example. 
-Anywhere in the code where you see `env.proccess.REACT_APP_*` it will need to be in the .env file. 
 
+You will need to create a `.env` file and add your variables there.
+I created a .env-template as an example.
+Anywhere in the code where you see `env.proccess.REACT_APP_*` it will need to be in the .env file.
 
 ### `npm run build`
 

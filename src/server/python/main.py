@@ -97,6 +97,14 @@ def notify_once(user,song_id):
     except Exception as e:
         print(e)
 
+def bad_word_check(id,dic):
+    for badwords in bad:
+        if badwords in dic[id].get("message").lower():
+            new_message = dic[id].get("message").lower().replace(badwords,'*'*len(badwords))
+            return new_message
+    else:
+        return 0
+
 
 @app.post("/skip/")
 async def create_item(item:Skip):
@@ -181,7 +189,11 @@ def add_to_list(msg):
 @app.post("/chat/")
 async def create_item(item:Message):
     print(item.stamp,item.name,item.message,item.mod)
-    msg.update({item.stamp:{"time":item.stamp,"author":item.name,"message":item.message,"mod":item.mod}})
+    badword = bad_word_check(item.stamp,{item.stamp:{"time":item.stamp,"author":item.name,"message":item.message,"mod":item.mod}})
+    if badword != 0:
+        msg.update({item.stamp:{"time":item.stamp,"author":item.name,"message":badword,"mod":item.mod}})
+    else:
+        msg.update({item.stamp:{"time":item.stamp,"author":item.name,"message":item.message,"mod":item.mod}})
     msg_list = add_to_list(msg)
     return msg_list
 

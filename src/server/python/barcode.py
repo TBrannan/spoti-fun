@@ -5,7 +5,7 @@ qr = qrcode.QRCode(
     box_size=10,
     border=4,
 )
-qr.add_data("something")
+qr.add_data("Hello Chy, Isn't this real cool 🎉")
 qr.make(fit=True)
 
 img = qr.make_image(fill_color="black", back_color="white")
